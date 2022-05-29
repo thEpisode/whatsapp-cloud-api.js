@@ -1,0 +1,33 @@
+{
+  "name": "whatsapp-cloud-api.js",
+  "version": "1.0.0",
+  "description": "This is a full implementation of official WhatsApp Cloud API",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thEpisode/whatsapp.js.git"
+  },
+  "keywords": [
+    "whatsapp"
+  ],
+  "author": "Camilo Rodriguez <camiepisode@outlook.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thEpisode/whatsapp.js/issues"
+  },
+  "homepage": "https://github.com/thEpisode/whatsapp.js#readme",
+  "dependencies": {
+    "axios": "^0.27.2"
+  },
+  "devDependencies": {
+    "standard": "^17.0.0"
+  },
+  "standard": {
+    "ignore": [
+      "/node_modules/**/*.js"
+    ]
+  }
+}
