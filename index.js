@@ -1,5 +1,5 @@
 'use strict';
 
-const WhatsAppCloudApi = require('./WhatsAppCloudApi')
+const WhatsAppCloudApi = require('./src/WhatsAppCloudApi')
 
 module.exports = { WhatsAppCloudApi };

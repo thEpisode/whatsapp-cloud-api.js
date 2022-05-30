@@ -1,24 +1,21 @@
+const constants = require('./constants/prod')
+
 class WhatsAppCloudApi {
   constructor (params) {
     this._verifyToken = params.verifyToken;
     this._appToken = params.appToken
   }
 
-  /* This function will return the square of the number that the constructor of this class receives.*/
   sendMessage (data) {
     return this.#send(data)
   }
 
   #send (data) {
     return axios({
-      method: 'POST', // Required, HTTP method, a string, e.g. POST, GET
-      url:
-        'https://graph.facebook.com/v12.0/' +
-        data.phone_number_id +
-        '/messages?access_token=' +
-        this._appToken,
+      method: 'POST',
+      url: `${constants.META_API_ENDPOINT}${constants.META_API_VERSION}/${data.phone_number_id}/${constants.MESSAGES.ENTRY_POINT}${this._appToken}`,
       data: {
-        messaging_product: 'whatsapp',
+        messaging_product: constants.MESSAGING_PRODUCT,
         to: data.from,
         text: { body: data.message.body },
       },
@@ -26,3 +23,5 @@ class WhatsAppCloudApi {
     })
   }
 }
+
+module.exports = WhatsAppCloudApi
