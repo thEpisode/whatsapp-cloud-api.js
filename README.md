@@ -1,6 +1,6 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![GitHub license](https://img.shields.io/github/license/thepisode/whatsapp-cloud-api.js.svg)](https://github.com/thEpisode/whatsapp-cloud-api.js/blob/main/LICENSE) 
-[![npm](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/whatsapp-cloud-api)
+[![npm](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/whatsapp-cloud-api.js)
 
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
 
