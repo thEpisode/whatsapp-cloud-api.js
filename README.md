@@ -1,5 +1,5 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-[![GitHub license](https://img.shields.io/github/license/thepisode/whatsapp-cloud-api.svg)](https://github.com/thepisode/whatsapp-cloud-api/blob/master/LICENSE) 
+[![GitHub license](https://img.shields.io/github/license/thepisode/whatsapp-cloud-api.svg)](https://github.com/thEpisode/whatsapp-cloud-api.js/blob/main/LICENSE) 
 [![npm](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/whatsapp-cloud-api-cli)
 
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
@@ -35,7 +35,7 @@ wAPI.sendMessage({
 
 | Feature  | Status |
 | ------------- | ------------- |
-| Send text messages  | ✅  |
+| Send text messages    | ✅  |
 
 Something missing? Make an issue and let us know!
 
