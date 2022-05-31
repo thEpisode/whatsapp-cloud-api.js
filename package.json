@@ -8,17 +8,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thEpisode/whatsapp.js.git"
+    "url": "git+https://github.com/thEpisode/whatsapp-cloud-api.js.git"
   },
   "keywords": [
-    "whatsapp"
+    "whatsapp",
+    "whatsapp cloud api",
+    "official",
+    "chatbot"
   ],
   "author": "Camilo Rodriguez <camiepisode@outlook.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/thEpisode/whatsapp.js/issues"
+    "url": "https://github.com/thEpisode/whatsapp-cloud-api.js/issues"
   },
-  "homepage": "https://github.com/thEpisode/whatsapp.js#readme",
+  "homepage": "https://github.com/thEpisode/whatsapp-cloud-api.js#readme",
   "dependencies": {
     "axios": "^0.27.2"
   },

@@ -22,7 +22,7 @@ const wAPI = new WhatsAppCloudApi({
 });
 
 wAPI.sendMessage({
-  phone_number_id: 'xxxxx',
+  phoneNumberId: 'xxxxx',
   from: 'xxxxx',
   message:{
     body: 'Hello World'
