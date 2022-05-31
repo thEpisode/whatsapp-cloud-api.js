@@ -19,13 +19,13 @@ class WhatsAppCloudApi {
       throw new Error('Required WhatsApp Token to process this message')
     }
 
-    if (!data.phoneNumberId) {
-      throw new Error('Required WhatsApp phoneNumberId to process this message')
+    if (!data.phoneNumber) {
+      throw new Error('Required WhatsApp phoneNumber to process this message')
     }
 
     return axios({
       method: 'POST',
-      url: `${constants.META_API_ENDPOINT}${constants.META_API_VERSION}/${data.phoneNumberId}/${constants.MESSAGES.ENTRY_POINT}${this._appToken}`,
+      url: `${constants.META_API_ENDPOINT}${constants.META_API_VERSION}/${data.phoneNumber}/${constants.MESSAGES.ENTRY_POINT}${this._appToken}`,
       data: {
         messaging_product: constants.MESSAGING_PRODUCT,
         to: data.from,
