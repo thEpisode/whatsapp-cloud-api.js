@@ -23,6 +23,15 @@ class WhatsAppCloudApi {
       throw new Error('Required WhatsApp phoneNumber to process this message')
     }
 
+    switch (data.type) {
+      case 'text':
+      default:
+        return this.#sendTextMessage(data)
+        break;
+    }
+  }
+
+  #sendTextMessage (data) {
     return axios({
       method: 'POST',
       url: `${constants.META_API_ENDPOINT}${constants.META_API_VERSION}/${data.from.phoneNumber}/${constants.MESSAGES.ENTRY_POINT}${this._appToken}`,

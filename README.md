@@ -10,7 +10,9 @@ This is a full implementation of official WhatsApp Cloud API
 
 ## Installation
 
-The module is now available on npm! `npm i whatsapp-web.js`
+The module is now available on npm! 
+
+`npm i --save whatsapp-web.js`
 
 ## Example usage
 
@@ -22,6 +24,7 @@ const wAPI = new WhatsAppCloudApi({
 });
 
 wAPI.sendMessage({
+  type:'text',
   to: {
     phoneNumber: '+1xxxxx'
   },
@@ -49,5 +52,5 @@ Pull requests are welcome! If you want something you'd like to add, please do. F
 
 ## Disclaimer
 
-This project is not affiliated, associated, authorized, endorsed by, or in any way officially connected with WhatsApp or any of its subsidiaries or its affiliates. The official WhatsApp website can be found at https://whatsapp.com. "WhatsApp" as well as related names, marks, emblems and images are registered trademarks of their respective owners.
+This project is not affiliated, associated, authorized, endorsed by, or in any way officially connected with WhatsApp or any of its subsidiaries or its affiliates. The official WhatsApp website can be found at https://whatsapp.com and official documentation for Meta can be found at https://developers.facebook.com/docs/whatsapp/cloud-api. "WhatsApp" as well as related names, marks, emblems and images are registered trademarks of their respective owners.
 
