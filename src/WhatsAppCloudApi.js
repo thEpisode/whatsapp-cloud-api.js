@@ -19,7 +19,7 @@ class WhatsAppCloudApi {
       throw new Error('Required WhatsApp Token to process this message')
     }
 
-    if (!data.phoneNumber) {
+    if (!data.to.phoneNumber) {
       throw new Error('Required WhatsApp phoneNumber to process this message')
     }
 
