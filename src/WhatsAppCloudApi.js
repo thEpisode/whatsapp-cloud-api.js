@@ -33,16 +33,21 @@ class WhatsAppCloudApi {
   }
 
   #sendTextMessage (data) {
-    return axios({
-      method: 'POST',
-      url: `${constants.META_API_ENDPOINT}${constants.META_API_VERSION}/${data.from.phoneNumber}/${constants.MESSAGES.ENTRY_POINT}${this._appToken}`,
-      data: {
-        messaging_product: constants.MESSAGING_PRODUCT,
-        to: data.to.phoneNumber,
-        text: { body: data.message.body || '' },
-      },
-      headers: { 'Content-Type': 'application/json' },
-    })
+    try {
+      return axios({
+        method: 'POST',
+        url: `${constants.META_API_ENDPOINT}${constants.META_API_VERSION}/${data.from.phoneNumber}/${constants.MESSAGES.ENTRY_POINT}${this._appToken}`,
+        data: {
+          messaging_product: constants.MESSAGING_PRODUCT,
+          to: data.to.phoneNumber,
+          text: { body: data.message.body || '' },
+        },
+        headers: { 'Content-Type': 'application/json' },
+      })  
+    } catch (error) {
+      console.error(error)
+      return null
+    }
   }
 }
 
