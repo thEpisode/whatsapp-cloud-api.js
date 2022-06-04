@@ -8,16 +8,12 @@ class WhatsAppCloudApi {
   }
 
   sendMessage (data) {
-    if (!data || !data.message || !data.message.body) {
-      throw new Error('Required WhatsApp data to process this message')
-    }
-
-    return this.#send(data)
-  }
-
-  #send (data) {
     if (!this._appToken) {
       throw new Error('Required WhatsApp Token to process this message')
+    }
+
+    if (!data || !data.message || !data.message) {
+      throw new Error('Required WhatsApp data and messagge to process this message')
     }
 
     if (!data.to.phoneNumber) {
@@ -25,25 +21,78 @@ class WhatsAppCloudApi {
     }
 
     switch (data.type) {
+      case 'location':
+        return this.#sendLocationMessage(data)
+      case 'image':
+      case 'video':
+      case 'sticker':
+        return this.#sendMediaMessage(data)
+      case 'list':
+      case 'button':
+        return this.#sendInteractiveMessage(data)
+      case 'contact':
+        return this.#sendContactMessage(data)
       case 'text':
       default:
         return this.#sendTextMessage(data)
-        break;
     }
   }
 
   #sendTextMessage (data) {
+    this.#sendMessage({
+      type: constants.TYPES.TEXT,
+      to: data.to.phoneNumber,
+      text: { body: data.message.body || '' },
+    })
+  }
+
+  #sendMediaMessage (data) {
+    this.#sendMessage({
+      type: constants.TYPES.IMAGE,
+      to: data.to.phoneNumber,
+      image: data.message.image || {}
+    })
+  }
+
+  #sendInteractiveMessage (data) {
+    this.#sendMessage({
+      type: constants.TYPES.INTERACTIVE,
+      to: data.to.phoneNumber,
+      interactive: data.message.interactive || {}
+    })
+  }
+
+  #sendLocationMessage (data) {
+    this.#sendMessage({
+      type: constants.TYPES.LOCATION,
+      to: data.to.phoneNumber,
+      location: data.message.location || {}
+    })
+  }
+
+  #sendContactMessage (data) {
+    this.#sendMessage({
+      type: constants.TYPES.CONTACTS,
+      contats: data.message.contacts || []
+    })
+  }
+
+  #sendMessage (data) {
     try {
       return axios({
         method: 'POST',
-        url: `${constants.META_API_ENDPOINT}${constants.META_API_VERSION}/${data.from.phoneNumber}/${constants.MESSAGES.ENTRY_POINT}${this._appToken}`,
-        data: {
-          messaging_product: constants.MESSAGING_PRODUCT,
-          to: data.to.phoneNumber,
-          text: { body: data.message.body || '' },
+        url: `${constants.META_API_ENDPOINT}/${constants.META_API_VERSION}/${data.from.phoneNumber}/${constants.MESSAGES.ENTRY_POINT}`,
+        data: JSON.stringify({
+          ...{
+            messaging_product: constants.MESSAGING_PRODUCT
+          },
+          ...data
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this._appToken}`
         },
-        headers: { 'Content-Type': 'application/json' },
-      })  
+      })
     } catch (error) {
       console.error(error)
       return null
