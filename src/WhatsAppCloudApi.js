@@ -81,7 +81,7 @@ class WhatsAppCloudApi {
     try {
       return axios({
         method: 'POST',
-        url: `${constants.META_API_ENDPOINT}/${constants.META_API_VERSION}/${data.from.phoneNumber}/${constants.MESSAGES.ENTRY_POINT}`,
+        url: `${constants.META_API_ENDPOINT}/${constants.META_API_VERSION}/${data.from.phoneNumberId}/${constants.MESSAGES.ENTRY_POINT}`,
         data: JSON.stringify({
           ...{
             messaging_product: constants.MESSAGING_PRODUCT
