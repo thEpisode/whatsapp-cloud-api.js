@@ -45,7 +45,7 @@ class WhatsAppCloudApi {
   #sendTextMessage (data) {
     this.#sendMessage({
       type: constants.TYPES.TEXT,
-      to: data.to,
+      to: data.to.phoneNumber,
       from: data.from,
       text: { body: data.message.body || '' },
     })
@@ -54,7 +54,7 @@ class WhatsAppCloudApi {
   #sendMediaMessage (data) {
     this.#sendMessage({
       type: constants.TYPES.IMAGE,
-      to: data.to,
+      to: data.to.phoneNumber,
       from: data.from,
       image: data.message.image || {}
     })
@@ -63,7 +63,7 @@ class WhatsAppCloudApi {
   #sendInteractiveMessage (data) {
     this.#sendMessage({
       type: constants.TYPES.INTERACTIVE,
-      to: data.to,
+      to: data.to.phoneNumber,
       from: data.from,
       interactive: data.message.interactive || {}
     })
@@ -72,7 +72,7 @@ class WhatsAppCloudApi {
   #sendLocationMessage (data) {
     this.#sendMessage({
       type: constants.TYPES.LOCATION,
-      to: data.to,
+      to: data.to.phoneNumber,
       from: data.from,
       location: data.message.location || {}
     })
@@ -81,31 +81,39 @@ class WhatsAppCloudApi {
   #sendContactMessage (data) {
     this.#sendMessage({
       type: constants.TYPES.CONTACTS,
-      to: data.to,
+      to: data.to.phoneNumber,
       from: data.from,
       contats: data.message.contacts || []
     })
   }
 
-  #sendMessage (data) {
+  async #sendMessage (data) {
     try {
-      return axios({
+      const url = `${constants.META_API_ENDPOINT}/${constants.META_API_VERSION}/${data.from.phoneNumberId}/${constants.MESSAGES.ENTRY_POINT}`
+      const payload = {
+        ...{
+          messaging_product: constants.MESSAGING_PRODUCT
+        },
+        ...data
+      }
+      console.log(url)
+      console.log(payload)
+      const response = await axios({
         method: 'POST',
-        url: `${constants.META_API_ENDPOINT}/${constants.META_API_VERSION}/${data.from.phoneNumberId}/${constants.MESSAGES.ENTRY_POINT}`,
-        data: JSON.stringify({
-          ...{
-            messaging_product: constants.MESSAGING_PRODUCT
-          },
-          ...data
-        }),
+        url,
+        data: payload,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${this._appToken}`
         },
       })
+      console.log(response)
+      return response
     } catch (error) {
       console.error(error)
-      return null
+      const { response } = error;
+      const { request, ...errorObject } = response; // take everything but 'request'
+      console.log(errorObject);
     }
   }
 }
