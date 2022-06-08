@@ -17,7 +17,11 @@ class WhatsAppCloudApi {
     }
 
     if (!data.to.phoneNumber) {
-      throw new Error('Required WhatsApp phoneNumber to process this message')
+      throw new Error('Required To WhatsApp phoneNumber to process this message')
+    }
+
+    if (!data.from.phoneNumberId) {
+      throw new Error('Required From WhatsApp phoneNumber id to process this message')
     }
 
     switch (data.type) {
@@ -41,7 +45,8 @@ class WhatsAppCloudApi {
   #sendTextMessage (data) {
     this.#sendMessage({
       type: constants.TYPES.TEXT,
-      to: data.to.phoneNumber,
+      to: data.to,
+      from: data.from,
       text: { body: data.message.body || '' },
     })
   }
@@ -49,7 +54,8 @@ class WhatsAppCloudApi {
   #sendMediaMessage (data) {
     this.#sendMessage({
       type: constants.TYPES.IMAGE,
-      to: data.to.phoneNumber,
+      to: data.to,
+      from: data.from,
       image: data.message.image || {}
     })
   }
@@ -57,7 +63,8 @@ class WhatsAppCloudApi {
   #sendInteractiveMessage (data) {
     this.#sendMessage({
       type: constants.TYPES.INTERACTIVE,
-      to: data.to.phoneNumber,
+      to: data.to,
+      from: data.from,
       interactive: data.message.interactive || {}
     })
   }
@@ -65,7 +72,8 @@ class WhatsAppCloudApi {
   #sendLocationMessage (data) {
     this.#sendMessage({
       type: constants.TYPES.LOCATION,
-      to: data.to.phoneNumber,
+      to: data.to,
+      from: data.from,
       location: data.message.location || {}
     })
   }
@@ -73,6 +81,8 @@ class WhatsAppCloudApi {
   #sendContactMessage (data) {
     this.#sendMessage({
       type: constants.TYPES.CONTACTS,
+      to: data.to,
+      from: data.from,
       contats: data.message.contacts || []
     })
   }
