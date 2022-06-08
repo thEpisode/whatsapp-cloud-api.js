@@ -96,8 +96,7 @@ class WhatsAppCloudApi {
         },
         ...data
       }
-      console.log(url)
-      console.log(payload)
+
       const response = await axios({
         method: 'POST',
         url,
@@ -107,13 +106,17 @@ class WhatsAppCloudApi {
           'Authorization': `Bearer ${this._appToken}`
         },
       })
-      console.log(response)
+
+      if (!response || !response.status === 200) {
+        return null
+      }
+
       return response
     } catch (error) {
       console.error(error)
-      const { response } = error;
-      const { request, ...errorObject } = response; // take everything but 'request'
-      console.log(errorObject);
+      const { response } = error
+      const { request, ...errorObject } = response
+      return errorObject
     }
   }
 }
